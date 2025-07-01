@@ -1,6 +1,10 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "name": "ginsen/symfony-ddd",
+    "description": "Application structure with Symfony 6.4 in a Docker container",
+    "keywords": ["api-rest", "DDD", "structure-app", "docker", "symfony"],
+    "homepage": "https://github.com/ginsen/symfony-ddd",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "authors": [
