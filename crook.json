@@ -1,0 +1,4 @@
+{
+    "pre-commit": "code-check",
+    "composer": "/usr/local/bin/composer"
+}

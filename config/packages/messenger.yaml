@@ -1,0 +1,76 @@
+framework:
+    messenger:
+        default_bus: query.bus
+        buses:
+            query.bus:
+                middleware:
+                    - validation
+
+            command.bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - validation
+                    - doctrine_transaction
+
+            event.bus:
+                default_middleware: allow_no_handlers
+                middleware:
+                    - validation
+                    # each time a message is handled, the Doctrine connection
+                    # is "pinged" and reconnected if it's closed. Useful
+                    # if your workers run for a long time and the database
+                    # connection is sometimes lost
+                    - doctrine_ping_connection
+                    # wraps all handlers in a single Doctrine transaction
+                    # handlers do not need to call flush() and an error
+                    # in any handler will cause a rollback
+                    - doctrine_transaction
+
+
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+
+#            sync: 'sync://'
+#
+#            doctrine_transport:
+#                dsn: '%env(DOCTRINE_MESSENGER_TRANSPORT_DSN)%'
+#                options:
+#                    queue_name: 'your-queue-name'
+#
+#            amqp_transport:
+#                dsn: '%env(AMQP_MESSENGER_TRANSPORT_DSN)%'
+#                failure_transport: amqp_transport_error
+#                serializer: App\Infrastructure\Symfony\Event\EventMessengerJsonSerializer
+#                options:
+#                    exchange:
+#                        name: (AMQP default)
+#                        default_publish_routing_key: your-app:your-queue-name
+#                    queues:
+#                        your-app:context-your-queue-name: ~
+#
+#            amqp_transport_error:
+#                dsn: '%env(AMQP_MESSENGER_TRANSPORT_DSN)%'
+#                serializer: App\Infrastructure\Symfony\Event\EventMessengerJsonSerializer
+#                options:
+#                    exchange:
+#                        name: (AMQP default)
+#                        default_publish_routing_key: your-app:your-queue-error
+#                    queues:
+#                        your-app:context-your-queue-name-error: ~
+
+        routing:
+            # Route your messages to the transports
+#           App\Domain\Event\YourEvent:     sync   # doctrine_transport, amqp_transport
+
+# when@test:
+#    framework:
+#        messenger:
+#            transports:
+#                # replace with your transport name here (e.g., my_transport: 'in-memory://')
+#                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
+#                async: 'in-memory://'

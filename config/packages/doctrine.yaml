@@ -1,0 +1,84 @@
+doctrine:
+    dbal:
+        types:
+            uuid: Ramsey\Uuid\Doctrine\UuidType
+            uri:  Ginsen\Uri\Doctrine\Type\UriType
+
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DB_URL_WRITE)%'
+                server_version: '%env(resolve:DB_VERSION)%'
+                driver: 'pdo_pgsql'
+                charset: utf8
+                profiling_collect_backtrace: '%kernel.debug%'
+                use_savepoints: true
+                keep_replica: true
+                replicas:
+                    replica1:
+                        url: '%env(resolve:DB_URL_READ)%'
+                        charset: utf8
+                        use_savepoints: true
+                mapping_types:
+                    uuid: string
+                    uri:  string
+                    json: json
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        controller_resolver:
+            auto_mapping: false
+        mappings:
+            App:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/config/doctrine-mapping'
+                prefix: 'App\Domain\Entity\Entity'
+                alias: App
+
+        dql:
+            string_functions:
+                JSONB_CONTAINS:     Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbContains
+                JSONB_EXISTS:       Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbExists
+                JSONB_EXISTS_ALL:   Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbExistsAll
+                JSONB_EXISTS_ANY:   Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbExistsAny
+                JSONB_IS_CONTAINED: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbIsContained
+                JSONB_INSERT:       Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonbInsert
+                JSON_EXTRACT_PATH:  Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonExtractPath
+                JSON_GET:           Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonGet
+                JSON_GET_PATH:      Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonGetPath
+                JSON_GET_PATH_TEXT: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonGetPathText
+                JSON_GET_TEXT:      Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\JsonGetText
+
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            replicas:
+                replica1:
+                    url: '%env(resolve:DB_URL_READ)%'
+                    dbname_suffix: '_test'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

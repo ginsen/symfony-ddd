@@ -1,0 +1,14 @@
+web_controllers:
+    resource:
+        path: ../src/UI/Web/Controller/
+        namespace: App\UI\Web\Controller
+    type: attribute
+    prefix: /
+
+api_controllers:
+    resource:
+        path: ../src/UI/ApiRest/
+        namespace: App\UI\ApiRest
+    type: attribute
+    prefix: /api
+

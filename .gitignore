@@ -1,0 +1,66 @@
+###> IDE (SublimeText, Eclipse, Zend Studio, Netbeans, PHPStorm, TextMate2, Visual Studio Code) ###
+Capfile
+.buildpath
+/.idea/
+nbproject
+.project
+.settings
+.sublime-project
+TextMate2
+.vscode
+**/.DS_Store
+###< IDE ###
+
+###> Docker config ###
+/docker/bash/ssh/*
+!/docker/bash/ssh/.gitkeep
+.env
+###< Docker config ###
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/.env
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/bin/*
+!/bin/console
+###< symfony/framework-bundle ###
+
+###> Sonar Scanner ###
+/.scannerwork/
+sonar-project.properties
+###< Sonar Scanner ###
+
+###> friendsofphp/php-cs-fixer ###
+.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> deptrac/deptrac ###
+/.deptrac.cache
+###< deptrac/deptrac ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+###> doctrine/orm ###
+!/var/cache/doctrine/
+/var/cache/doctrine/*
+!/var/cache/doctrine/.gitkeep
+###< doctrine/orm ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> codeception/codeception ###
+/tests/Functional/_output/*
+!/tests/Functional/_output/.gitignore
+/tests/Functional/Support/_generated/*
+!/tests/Functional/Support/_generated/.gitignore
+###< codeception/codeception ###

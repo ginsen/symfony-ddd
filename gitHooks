@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [[ ! -v PIPELINE && ! -e ./.git/hooks/pre-commit ]]; then
+  ./bin/crook add pre-commit code-check
+  echo "Created all git hooks"
+fi

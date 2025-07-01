@@ -1,0 +1,36 @@
+deptrac:
+    paths:
+        - ./src
+    exclude_files:
+        - '#.*test.*#'
+
+    layers:
+        # DDD layers
+        -   name: Domain
+            collectors:
+                -   type: classLike
+                    value: App\\[^\\]*\\Domain\\.*
+        -
+            name: Application
+            collectors:
+                -
+                   type: classLike
+                   value: App\\[^\\]*\\Application\\.*
+        -
+            name: Infrastructure
+            collectors:
+                -
+                   type: classLike
+                   value: App\\[^\\]*\\Infrastructure\\.*
+                -
+                   type: classLike
+                   value: Symfony\\.*
+
+    ruleset:
+        # DDD layers
+        Domain:
+        Application:
+            - Domain
+        Infrastructure:
+            - Domain
+            - Application

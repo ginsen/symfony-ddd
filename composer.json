@@ -1,0 +1,133 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "José Ginés Hernández Galindo",
+            "email": "j.gines@gmail.com",
+            "homepage": "https://github.com/ginsen"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:ginsen/crook.git"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "ext-json": "*",
+        "beberlei/assert": "^3.3.3",
+        "doctrine/doctrine-bundle": "^2.15",
+        "doctrine/doctrine-migrations-bundle": "^3.4.2",
+        "doctrine/orm": "^3.4.1",
+        "ginsen/http-client": "^1.0.2",
+        "ginsen/uri": "^1.0.2",
+        "nelmio/api-doc-bundle": "^5.4",
+        "nyholm/psr7": "^1.8.2",
+        "ramsey/uuid": "^4.9",
+        "ramsey/uuid-doctrine": "^2.1",
+        "scienta/doctrine-json-functions": "^6.3",
+        "symfony/amqp-messenger": "6.4.*",
+        "symfony/asset": "6.4.*",
+        "symfony/cache": "6.4.*",
+        "symfony/console": "6.4.*",
+        "symfony/doctrine-messenger": "6.4.*",
+        "symfony/dotenv": "6.4.*",
+        "symfony/flex": "^2.7.1",
+        "symfony/framework-bundle": "6.4.*",
+        "symfony/messenger": "6.4.*",
+        "symfony/monolog-bundle": "^3.10",
+        "symfony/runtime": "6.4.*",
+        "symfony/stopwatch": "6.4.*",
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
+        "symfony/yaml": "6.4.*",
+        "twig/extra-bundle": "^3.21",
+        "twig/twig": "^3.21.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "^5.3.2",
+        "codeception/module-asserts": "^3.2",
+        "codeception/module-cli": "^2.0.1",
+        "codeception/module-db": "^3.2.2",
+        "codeception/module-phpbrowser": "^3.0.1",
+        "codeception/module-rest": "^3.4.1",
+        "codeception/module-sequence": "^3.0",
+        "codeception/module-symfony": "^3.6",
+        "deptrac/deptrac": "^3.0",
+        "doctrine/doctrine-fixtures-bundle": "^4.1",
+        "erickskrauch/php-cs-fixer-custom-fixers": "^1.3",
+        "felipebool/crook": "^0.0.16",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "mockery/mockery": "^1.6.12",
+        "phpunit/phpunit": "^11.5.24",
+        "symfony/browser-kit": "6.4.*",
+        "symfony/css-selector": "6.4.*",
+        "symfony/debug-bundle": "6.4.*",
+        "symfony/phpunit-bridge": "^7.3",
+        "symfony/var-dumper": "6.4.*",
+        "symfony/web-profiler-bundle": "6.4.*"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "bin-dir": "bin",
+        "optimize-autoloader": true,
+        "bump-after-update": true,
+        "sort-packages": true,
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/",
+            "App\\Tests\\Unit\\": "tests/Unit/",
+            "App\\Tests\\Functional\\": "tests/Functional/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.4.*"
+        }
+    }
+}
